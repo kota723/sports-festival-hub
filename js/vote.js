@@ -329,7 +329,7 @@ window.submitUserVote = async function (pollId, optionId) {
         });
 
         // GASへデータを送信 (バックグラウンド実行のためawait不要)
-        const gasUrl = "https://script.google.com/macros/s/AKfycbwXswxvHdLCTIpZjiVjYJunWJE3X7DDgzHVNvvjU-8XSzbc9N2Bihki--rm5KxulnKTiA/exec";
+        const gasUrl = "https://script.google.com/macros/s/AKfycbxot6RLnzgzQ8y3_YeptOonmwBmkbMs5WBoLfPL5wn1jG1I02IDNAnpkRDGv2EZfy0/exec";
         fetch(gasUrl, {
             method: 'POST',
             mode: 'no-cors',
