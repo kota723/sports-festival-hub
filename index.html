@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Cache Busting Metas -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
@@ -36,89 +35,93 @@
 
     <!-- Header -->
     <header class="glass fixed top-0 w-full z-50 border-b border-white/50 backdrop-blur-xl bg-white/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 md:h-16 flex items-center justify-between gap-2 overflow-hidden">
             <div class="flex-shrink-0">
-                <h1 class="text-2xl font-black italic tracking-wider text-sf-blue uppercase drop-shadow-sm">SPORTS
-                    FESTIVAL</h1>
+                <h1
+                    class="text-base md:text-2xl font-black italic tracking-wider text-sf-blue uppercase drop-shadow-sm truncate">
+                    SPORTS FESTIVAL</h1>
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 md:gap-4 shrink-0">
                 <!-- User Email Display -->
                 <span
-                    class="user-email-display hidden text-xs md:text-sm font-bold text-slate-500 bg-slate-200/50 py-1.5 px-3 rounded-full border border-slate-300"></span>
+                    class="user-email-display hidden text-[10px] md:text-sm font-bold text-slate-500 bg-slate-200/50 py-1 px-1.5 md:py-1.5 md:px-3 rounded-full border border-slate-300 max-w-[90px] md:max-w-xs truncate tracking-tighter"></span>
 
-                <!-- Login Button (Shown when logged out) -->
+                <!-- Login Button -->
                 <button id="btn-login" onclick="showLoginPrompt()"
-                    class="bg-sf-blue hover:bg-blue-800 text-white font-black py-2 px-6 rounded-full shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200">
-                    ログイン 🔑
+                    class="bg-sf-blue hover:bg-blue-800 text-white font-black py-1.5 px-3 md:py-2 md:px-6 rounded-full shadow-[2px_2px_0_#1e293b] md:shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200 text-xs md:text-base whitespace-nowrap">
+                    ログイン🔑
                 </button>
 
-                <!-- Sign Out Button (Shown when logged in) -->
+                <!-- Sign Out Button -->
                 <button id="btn-logout" onclick="globalMockLogout()"
-                    class="hidden bg-slate-800 hover:bg-slate-900 text-white font-black py-2 px-6 rounded-full shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200">
-                    サインアウト 👋
+                    class="hidden bg-slate-800 hover:bg-slate-900 text-white font-black py-1.5 px-3 md:py-2 md:px-6 rounded-full shadow-[2px_2px_0_#1e293b] md:shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200 text-xs md:text-base whitespace-nowrap">
+                    <span class="hidden md:inline">サインアウト </span>👋
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Login View (Visible when NOT logged in) -->
-    <main id="login-view" class="flex-grow flex items-center justify-center pt-28 pb-12 px-4 z-40 relative">
+    <main id="login-view" class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 z-40 relative">
         <div
-            class="glass-card bg-white p-10 max-w-md w-full text-center rounded-[2.5rem] shadow-[8px_8px_0_#1e293b] border-4 border-slate-800 relative">
+            class="glass-card bg-white p-8 md:p-10 max-w-md w-full text-center rounded-[2rem] shadow-[8px_8px_0_#1e293b] border-4 border-slate-800 relative overflow-hidden">
             <div
                 class="absolute -top-10 -right-10 w-40 h-40 bg-sf-blue/20 rounded-full mix-blend-multiply filter blur-3xl">
             </div>
             <div
                 class="absolute -bottom-10 -left-10 w-40 h-40 bg-sf-red/10 rounded-full mix-blend-multiply filter blur-3xl">
             </div>
-            <h3 class="text-3xl font-black mb-4 relative z-10 text-slate-800">Googleでログイン</h3>
-            <p class="text-slate-600 font-bold mb-8 text-sm relative z-10">学校のアカウント(@mita-is.ed.jp)でログインしてね！<br><span
-                    class="text-sf-red">※ログインしないとサイトは見られません🙅‍♂️</span></p>
+            <h3 class="text-2xl md:text-3xl font-black mb-4 relative z-10 text-slate-800">Googleでログイン</h3>
+            <p class="text-slate-600 font-bold mb-8 text-xs md:text-sm relative z-10 leading-relaxed">
+                学校のアカウント(@mita-is.ed.jp)<br>でログインしてね！<br>
+                <span class="text-sf-red mt-2 inline-block">※ログインしないとサイトは見られません🙅‍♂️</span>
+            </p>
             <button onclick="globalMockLogin()"
-                class="bg-slate-800 text-white font-black py-4 px-8 rounded-full shadow-[4px_4px_0_#sf-blue] transform transition active:translate-y-1 active:shadow-none mx-auto w-full relative z-10 text-lg">
+                class="bg-slate-800 hover:bg-slate-700 text-white font-black py-3 md:py-4 px-6 md:px-8 rounded-full shadow-[4px_4px_0_#sf-blue] transform transition active:translate-y-1 active:shadow-none mx-auto w-full relative z-10 text-sm md:text-lg">
                 ログイン画面へ進む
             </button>
         </div>
     </main>
 
     <!-- App View (Hidden when NOT logged in) -->
-    <main id="app-view" class="hidden flex-grow pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <main id="app-view" class="hidden flex-grow pt-24 md:pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <!-- Hero / Countdown Section -->
-        <section class="text-center mb-16 relative">
-
+        <section class="text-center mb-10 md:mb-16 relative">
             <h2
-                class="text-lg md:text-xl font-black text-slate-800 bg-yellow-300 inline-block px-6 py-2 rounded-full border-2 border-slate-800 shadow-[4px_4px_0_#1e293b] transform -rotate-2 mb-6 cursor-default hover:rotate-0 transition-transform">
+                class="text-xs md:text-xl font-black text-slate-800 bg-yellow-300 inline-block px-4 py-1.5 md:px-6 md:py-2 rounded-full border-2 border-slate-800 shadow-[4px_4px_0_#1e293b] transform -rotate-2 mb-4 md:mb-6 cursor-default hover:rotate-0 transition-transform">
                 2026年6月17日まで残り</h2>
 
             <div
-                class="bg-white inline-block px-10 py-6 md:py-8 mb-2 border-4 border-sf-blue rounded-3xl shadow-[8px_8px_0_#0047AB] transform hover:-translate-y-1 transition-all duration-300">
+                class="bg-white inline-block px-4 py-5 md:px-10 md:py-8 mb-2 border-4 border-sf-blue rounded-[2rem] md:rounded-3xl shadow-[6px_6px_0_#0047AB] md:shadow-[8px_8px_0_#0047AB] transform hover:-translate-y-1 transition-all duration-300 w-[95%] sm:w-auto mx-auto overflow-hidden">
                 <div id="countdown"
-                    class="text-4xl md:text-5xl lg:text-7xl font-black tracking-widest tabular-nums text-sf-blue mb-2 flex justify-center gap-1 md:gap-3 items-center">
+                    class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-widest tabular-nums text-sf-blue mb-1 md:mb-2 flex justify-center gap-0.5 sm:gap-2 items-center whitespace-nowrap">
                     00:00:00:00
                 </div>
                 <!-- Labels underneath -->
-                <div class="flex justify-center text-xs md:text-sm font-black text-slate-600 gap-8 md:gap-16">
+                <div
+                    class="flex justify-around text-[9px] sm:text-xs md:text-sm font-black text-slate-600 px-2 lg:px-6 mt-1 md:mt-2">
                     <span>DAYS</span><span>HRS</span><span>MIN</span><span>SEC</span>
                 </div>
             </div>
         </section>
 
         <!-- Navigation Cards Grid -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <!-- Card 1: Election Video -->
             <a href="election.html"
-                class="bg-white p-6 flex flex-col group block border-4 border-slate-800 rounded-3xl shadow-[6px_6px_0_#1e293b] hover:-translate-y-2 hover:-rotate-1 transition-all duration-300">
+                class="bg-white p-5 md:p-6 flex flex-col group block border-4 border-slate-800 rounded-[1.5rem] md:rounded-3xl shadow-[4px_4px_0_#1e293b] md:shadow-[6px_6px_0_#1e293b] hover:-translate-y-2 transition-all duration-300">
                 <div
-                    class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-4 text-3xl group-hover:scale-110 transition">
-                    📺
-                </div>
-                <h4 class="text-xl font-black mb-2 text-slate-800">選挙時の公約動画</h4>
-                <p class="text-sm text-slate-600 flex-grow font-semibold">
-                    現・委員長と副委員長が立候補時に語った「約束」。スポフェスに向けて公約は果たされているか、みんなの目でチェックしよう👀</p>
+                    class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-100 flex items-center justify-center mb-3 md:mb-4 text-2xl md:text-3xl group-hover:scale-110 transition">
+                    📺</div>
+                <h4 class="text-lg md:text-xl font-black mb-2 text-slate-800">選挙時の公約動画</h4>
+                <p class="text-xs md:text-sm text-slate-600 flex-grow font-semibold">
+                    現・委員長と副委員長が立候補時に語った約束。公約は果たされているか、みんなの目でチェックしよう👀</p>
                 <div
-                    class="mt-4 text-sf-blue font-black text-sm flex items-center bg-blue-50 py-2 px-4 rounded-full w-max">
-                    動画を振り返る <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
+                    class="mt-4 text-sf-blue font-black text-xs md:text-sm flex items-center bg-blue-50 py-1.5 px-3 md:py-2 md:px-4 rounded-full w-max">
+                    動画を振り返る <svg
+                        class="w-3 h-3 md:w-4 md:h-4 ml-1.5 md:ml-2 transform group-hover:translate-x-1.5 transition"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </div>
@@ -126,33 +129,34 @@
 
             <!-- Card 2: Vote (Primary Action) -->
             <div
-                class="bg-yellow-50 p-6 flex flex-col border-4 border-sf-red rounded-3xl shadow-[6px_6px_0_#DC143C] hover:-translate-y-2 hover:rotate-1 transition-all duration-300 md:-translate-y-4 relative group">
-                <div class="absolute -top-4 -right-4 text-4xl">🔥</div>
+                class="bg-yellow-50 p-5 md:p-6 flex flex-col border-4 border-sf-red rounded-[1.5rem] md:rounded-3xl shadow-[4px_4px_0_#DC143C] md:shadow-[6px_6px_0_#DC143C] hover:-translate-y-2 transition-all duration-300 md:-translate-y-4 relative group">
+                <div class="absolute -top-3 -right-3 md:-top-4 md:-right-4 text-3xl md:text-4xl">🔥</div>
                 <div
-                    class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 text-3xl group-hover:scale-110 transition">
-                    🗳️
-                </div>
-                <h4 class="text-xl font-black mb-2 text-slate-800">新種目投票</h4>
-                <p class="text-sm text-slate-600 flex-grow font-semibold">1人1票のみ。みんなの「やりたい！」が今年のラスト1種目を決める！</p>
+                    class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-red-100 flex items-center justify-center mb-3 md:mb-4 text-2xl md:text-3xl group-hover:scale-110 transition">
+                    🗳️</div>
+                <h4 class="text-lg md:text-xl font-black mb-2 text-slate-800">新種目投票</h4>
+                <p class="text-xs md:text-sm text-slate-600 flex-grow font-semibold">1人1票のみ。みんなの「やりたい！」が今年のラスト1種目を決める！
+                </p>
                 <a href="vote.html"
-                    class="mt-6 bg-sf-red hover:bg-red-700 text-white font-black py-4 px-4 rounded-xl text-center border-b-4 border-red-900 active:border-b-0 active:translate-y-1 transform transition duration-150 text-lg">
+                    class="mt-5 md:mt-6 bg-sf-red hover:bg-red-700 text-white font-black py-3 px-4 md:py-4 rounded-xl text-center border-b-4 border-red-900 active:border-b-0 active:translate-y-1 transform transition duration-150 text-base md:text-lg">
                     今すぐ投票する！
                 </a>
             </div>
 
             <!-- Card 3: Rules -->
             <a href="rules.html"
-                class="bg-white p-6 flex flex-col group block border-4 border-slate-800 rounded-3xl shadow-[6px_6px_0_#1e293b] hover:-translate-y-2 hover:rotate-1 transition-all duration-300">
+                class="bg-white p-5 md:p-6 flex flex-col group block border-4 border-slate-800 rounded-[1.5rem] md:rounded-3xl shadow-[4px_4px_0_#1e293b] md:shadow-[6px_6px_0_#1e293b] hover:-translate-y-2 transition-all duration-300">
                 <div
-                    class="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mb-4 text-3xl group-hover:scale-110 transition">
-                    📖
-                </div>
-                <h4 class="text-xl font-black mb-2 text-slate-800">ルール＆ペナルティ</h4>
-                <p class="text-sm text-slate-600 flex-grow font-semibold">減点やペナルティの条件。もったいないから、さらっとでも読んでおこう⚠️</p>
+                    class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-100 flex items-center justify-center mb-3 md:mb-4 text-2xl md:text-3xl group-hover:scale-110 transition">
+                    📖</div>
+                <h4 class="text-lg md:text-xl font-black mb-2 text-slate-800">ルール＆ペナルティ</h4>
+                <p class="text-xs md:text-sm text-slate-600 flex-grow font-semibold">減点やペナルティの条件。もったいないから、さらっとでも読んでおこう⚠️
+                </p>
                 <div
-                    class="mt-4 text-slate-800 font-black text-sm flex items-center bg-slate-100 py-2 px-4 rounded-full w-max">
-                    確認する <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
+                    class="mt-4 text-slate-800 font-black text-xs md:text-sm flex items-center bg-slate-100 py-1.5 px-3 md:py-2 md:px-4 rounded-full w-max">
+                    確認する <svg
+                        class="w-3 h-3 md:w-4 md:h-4 ml-1.5 md:ml-2 transform group-hover:translate-x-1.5 transition"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </div>
@@ -161,27 +165,26 @@
 
         <!-- Feedback Box -->
         <section
-            class="mt-16 bg-white p-8 rounded-3xl border-4 border-slate-800 shadow-[8px_8px_0_#1e293b] flex flex-col md:flex-row items-center gap-8 justify-between relative overflow-hidden backdrop-blur-sm transform hover:-translate-y-1 transition duration-300 group">
+            class="mt-12 md:mt-16 bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-3xl border-4 border-slate-800 shadow-[6px_6px_0_#1e293b] md:shadow-[8px_8px_0_#1e293b] flex flex-col md:flex-row items-center gap-6 justify-between relative overflow-hidden backdrop-blur-sm transform hover:-translate-y-1 transition duration-300 group">
             <div
                 class="absolute -right-10 -bottom-10 w-32 h-32 bg-sf-blue/20 rounded-full blur-2xl group-hover:bg-sf-blue/30 transition">
             </div>
             <div class="relative z-10 flex-grow text-center md:text-left">
                 <h3
-                    class="text-3xl font-black text-slate-800 mb-3 flex items-center gap-3 justify-center md:justify-start">
-                    <span class="text-4xl">📮</span> みんなの意見箱
+                    class="text-xl md:text-3xl font-black text-slate-800 mb-2 md:mb-3 flex items-center justify-center md:justify-start gap-2 md:gap-3">
+                    <span class="text-3xl md:text-4xl">📮</span> みんなの意見箱
                 </h3>
-                <p class="text-slate-600 font-bold mb-2">
-                    スポフェスをより良くするための意見や質問を募集しています！<br class="hidden md:block">
-                    いただいた意見は実行委員会で真剣にチェックし、なるべく実現してきたいと思っています。
+                <p class="text-xs md:text-base text-slate-600 font-bold mb-2">
+                    スポフェスをより良くするための意見や質問を募集しています！<br class="hidden md:block">いただく意見は実行委員会で真剣にチェックします。
                 </p>
                 <p
-                    class="text-blue-600 font-black text-sm bg-blue-50 inline-block px-3 py-1 rounded-xl mt-2 border border-blue-200">
-                    「これってどうなってるの？」「ここを変えてほしい！」なんでもOKです🙌</p>
+                    class="text-blue-600 font-black text-[10px] md:text-sm bg-blue-50 inline-block px-2 py-1 md:px-3 md:py-1.5 rounded-lg md:rounded-xl mt-1 border border-blue-200">
+                    「ここを変えてほしい！」なんでもOK🙌</p>
             </div>
-            <div class="relative z-10 flex-shrink-0 w-full md:w-auto mt-4 md:mt-0">
+            <div class="relative z-10 flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
                 <a href="https://forms.gle/EXEFdTJopA3GLsCZ8" target="_blank" rel="noopener noreferrer"
-                    class="bg-slate-800 hover:bg-slate-900 border-2 border-slate-800 text-white font-black py-4 px-8 rounded-full shadow-[4px_4px_0_#sf-blue] transform transition active:translate-y-1 active:shadow-none flex items-center justify-center gap-2 text-center text-lg">
-                    意見箱に投稿する 🚀
+                    class="bg-slate-800 hover:bg-slate-900 border-2 border-slate-800 text-white font-black py-3 px-6 md:py-4 md:px-8 rounded-full shadow-[2px_2px_0_#sf-blue] md:shadow-[4px_4px_0_#sf-blue] transform transition active:translate-y-1 active:shadow-none flex items-center justify-center gap-2 text-center text-sm md:text-lg">
+                    意見箱に投稿 🚀
                 </a>
             </div>
         </section>
@@ -189,9 +192,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-300 bg-slate-50 py-8 text-center text-sm text-slate-500 w-full mt-auto">
-        <p>&copy; 2026 スポーツフェスティバル実行委員会. All rights reserved.</p>
-        <p class="mt-2">※本サイトは学内限定公開です。リンクの外部共有を禁じます。</p>
+    <footer
+        class="border-t border-slate-300 bg-slate-50 py-6 md:py-8 text-center text-xs md:text-sm text-slate-500 w-full mt-auto">
+        <p>&copy; 2026 スポーツフェスティバル実行委員会</p>
+        <p class="mt-1 md:mt-2 scale-90 md:scale-100">※学内限定公開です。外部共有を禁じます。</p>
     </footer>
 
     <script type="module" src="js/main.js?v=firebase"></script>
