@@ -23,47 +23,35 @@
 </head>
 
 <body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen relative flex flex-col">
-    <!-- Global Login Overlay -->
-    <div id="global-login-overlay"
-        class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-100/90 backdrop-blur-lg transition-opacity duration-300">
-        <div class="glass-card bg-white p-10 max-w-md w-full mx-4 text-center shadow-2xl relative">
-            <div
-                class="absolute -top-10 -right-10 w-40 h-40 bg-sf-blue/20 rounded-full mix-blend-multiply filter blur-3xl">
-            </div>
-            <div
-                class="absolute -bottom-10 -left-10 w-40 h-40 bg-sf-red/10 rounded-full mix-blend-multiply filter blur-3xl">
-            </div>
-
-            <svg class="w-16 h-16 mx-auto mb-6 text-sf-blue relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                    d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z" />
-            </svg>
-            <h3 class="text-2xl font-bold mb-2 relative z-10 text-slate-800">Googleでログイン</h3>
-            <p class="text-slate-500 mb-8 text-sm relative z-10">学校のアカウント(@mita-is.ed.jp)でログインしてね！<br>ログインしないと入れません🙅‍♂️
-            </p>
-            <button onclick="globalMockLogin()"
-                class="bg-sf-blue text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-105 duration-300 flex items-center justify-center mx-auto gap-3 hover:bg-blue-800 w-full relative z-10">
-                Google でログインして進む
-            </button>
-        </div>
-    </div>
-
-    <div class="bg-lights"></div>
-
     <!-- Header -->
-    <header class="glass fixed top-0 w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center gap-4">
-            <a href="index.html" class="text-slate-500 hover:text-sf-blue transition flex items-center gap-1 font-bold">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-                HOME
-            </a>
-            <h1 class="text-xl font-bold tracking-wider text-sf-blue ml-auto">Election Videos</h1>
+    <header class="glass fixed top-0 w-full z-50 border-b border-white/50 backdrop-blur-xl bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html"
+                    class="bg-slate-800 text-white hover:bg-slate-700 transition px-4 py-2 rounded-full font-black text-sm border-2 border-slate-900 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                    HOMEへ戻る
+                </a>
+            </div>
+            <div class="flex-shrink-0 flex items-center gap-4">
+                <!-- User Email Display -->
+                <span
+                    class="user-email-display hidden text-xs md:text-sm font-bold text-slate-500 bg-slate-200/50 py-1.5 px-3 rounded-full border border-slate-300"></span>
+                <h1 class="text-xl font-black tracking-wider text-sf-blue drop-shadow-sm uppercase hidden md:block">
+                    ELECTION VIDEOS</h1>
+                <!-- Sign Out Button (Shown when logged in) -->
+                <button id="btn-logout" onclick="globalMockLogout()"
+                    class="hidden bg-slate-800 hover:bg-slate-900 text-white font-black py-2 px-6 rounded-full shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200">
+                    サインアウト 👋
+                </button>
+            </div>
         </div>
     </header>
 
-    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full space-y-12">
+    <main id="app-view" class="hidden flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full space-y-12">
 
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-5xl font-black mb-4 text-slate-800">トップ陣の公約動画（振り返り）</h2>
@@ -150,7 +138,7 @@
         <p class="mt-2">※本サイトは学内限定公開です。リンクの外部共有を禁じます。</p>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script type="module" src="js/main.js?v=firebase"></script>
 </body>
 
 </html>
