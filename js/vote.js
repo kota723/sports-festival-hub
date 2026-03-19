@@ -238,6 +238,7 @@ window.openPollDetail = function (pollId) {
                         <thead>
                             <tr class="border-b-2 border-slate-700">
                                 <th class="py-3 px-4 font-bold">メールアドレス</th>
+                                <th class="py-3 px-4 font-bold w-16 text-center">学年</th>
                                 <th class="py-3 px-4 font-bold">選択した項目</th>
                             </tr>
                         </thead>
@@ -249,9 +250,22 @@ window.openPollDetail = function (pollId) {
             for (const [email, optionId] of Object.entries(poll.voters)) {
                 const opt = poll.options.find(o => o.id === optionId);
                 const optText = opt ? opt.text : '不明';
+
+                let grade = "👨‍🏫"; // 教員など
+                const yearMatch = email.substring(0, 4);
+                if (yearMatch === "2021") grade = "高3";
+                else if (yearMatch === "2022") grade = "高2";
+                else if (yearMatch === "2023") grade = "高1";
+                else if (yearMatch === "2024") grade = "中3";
+                else if (yearMatch === "2025") grade = "中2";
+                else if (yearMatch === "2026") grade = "中1";
+
                 html += `
                     <tr class="border-b border-slate-700/50 hover:bg-slate-800 transition">
                         <td class="py-3 px-4 font-mono text-sm">${email}</td>
+                        <td class="py-3 px-4 text-center">
+                            <span class="bg-indigo-900/50 border border-indigo-400/30 text-indigo-100 font-bold py-1 px-2 rounded-lg text-xs tracking-wider">${grade}</span>
+                        </td>
                         <td class="py-3 px-4 font-bold text-sm">${optText}</td>
                     </tr>
                 `;
