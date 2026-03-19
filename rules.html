@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ルールと動き - SPORTS FEST 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sf-blue': '#0047AB',
+                        'sf-red': '#DC143C',
+                        'sf-dark': '#000B18',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen relative flex flex-col">
+    <!-- Global Login Overlay -->
+    <div id="global-login-overlay"
+        class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-100/90 backdrop-blur-lg transition-opacity duration-300">
+        <div class="glass-card bg-white p-10 max-w-md w-full mx-4 text-center shadow-2xl relative">
+            <div
+                class="absolute -top-10 -right-10 w-40 h-40 bg-sf-blue/20 rounded-full mix-blend-multiply filter blur-3xl">
+            </div>
+            <div
+                class="absolute -bottom-10 -left-10 w-40 h-40 bg-sf-red/10 rounded-full mix-blend-multiply filter blur-3xl">
+            </div>
+
+            <svg class="w-16 h-16 mx-auto mb-6 text-sf-blue relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z" />
+            </svg>
+            <h3 class="text-2xl font-bold mb-2 relative z-10 text-slate-800">Googleでログイン</h3>
+            <p class="text-slate-500 mb-8 text-sm relative z-10">学校のアカウント(@mita-is.ed.jp)でログインしてね！<br>ログインしないと入れません🙅‍♂️
+            </p>
+            <button onclick="globalMockLogin()"
+                class="bg-sf-blue text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-105 duration-300 flex items-center justify-center mx-auto gap-3 hover:bg-blue-800 w-full relative z-10">
+                Google でログインして進む
+            </button>
+        </div>
+    </div>
+
+    <div class="bg-lights"></div>
+
+    <!-- Header -->
+    <header class="glass fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center gap-4">
+            <a href="index.html" class="text-slate-500 hover:text-sf-blue transition flex items-center gap-1 font-bold">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                HOME
+            </a>
+            <h1 class="text-xl font-bold tracking-wider text-gradient ml-auto">Rules & Penalties</h1>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full space-y-12">
+
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-5xl font-black mb-2 text-slate-800">ルールブック</h2>
+            <p class="text-slate-500">サクッと目を通して、クラスのみんなにも教えてあげてね！</p>
+        </div>
+
+        <!-- Video Gallery -->
+        <section>
+            <h3
+                class="text-2xl font-bold mb-6 flex items-center gap-3 border-b-2 border-sf-blue pb-2 inline-flex text-slate-800">
+                <svg class="w-6 h-6 text-sf-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                競技別ルール動画
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Video 1 -->
+                <div class="glass-card overflow-hidden group">
+                    <div
+                        class="aspect-video bg-slate-200 border-b border-slate-100 flex items-center justify-center relative">
+                        <span class="text-slate-400 font-mono text-xs z-10">[iframe embed: 大玉送り]</span>
+                    </div>
+                    <div class="p-4 bg-white/50">
+                        <h4 class="font-bold text-lg text-slate-800">大玉送り</h4>
+                        <p class="text-sm text-slate-600 mt-1">コース取りの注意点、落下時の復帰方法</p>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="glass-card overflow-hidden group">
+                    <div class="aspect-video bg-slate-200 border-b border-slate-100 flex items-center justify-center">
+                        <span class="text-slate-400 font-mono text-xs">[iframe embed: リレー]</span>
+                    </div>
+                    <div class="p-4 bg-white/50">
+                        <h4 class="font-bold text-lg text-slate-800">クラス対抗リレー</h4>
+                        <p class="text-sm text-slate-600 mt-1">バトンゾーンの正確な使い方とテイクオーバー</p>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="glass-card overflow-hidden group">
+                    <div class="aspect-video bg-slate-200 border-b border-slate-100 flex items-center justify-center">
+                        <span class="text-slate-400 font-mono text-xs">[iframe embed: 綱引き]</span>
+                    </div>
+                    <div class="p-4 bg-white/50">
+                        <h4 class="font-bold text-lg text-slate-800">綱引き</h4>
+                        <p class="text-sm text-slate-600 mt-1">反則になる姿勢（座り込み）について</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Penalties -->
+        <section id="penalties">
+            <h3
+                class="text-2xl font-bold mb-6 flex items-center gap-3 border-b-2 border-sf-red pb-2 inline-flex text-sf-red">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                    </path>
+                </svg>
+                ペナルティ・規定事項 (さらっと確認！)
+            </h3>
+            <div class="space-y-4">
+
+                <!-- Accordion 1 -->
+                <div class="glass-card bg-white border border-slate-200">
+                    <button class="w-full px-6 py-4 flex justify-between items-center text-left focus:outline-none"
+                        onclick="toggleAccordion('acc1')">
+                        <span class="font-bold text-lg text-slate-800">1. 招集エリアでの私語・遅刻</span>
+                        <svg id="icon-acc1" class="w-5 h-5 text-slate-400 transform transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div id="content-acc1" class="max-h-0 overflow-hidden px-6 transition-all duration-300">
+                        <div class="pb-4 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                            <p>招集エリアでの私語は進行の妨げになります。各クラス1回の警告後、改善されない場合は<span class="text-sf-red font-bold">クラス総合得点から
+                                    -10点</span>のペナルティを科します。</p>
+                            <p class="mt-2">また、招集時刻に遅れた場合はいかなる理由であれ、その生徒の出場権を剥奪します。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion 2 -->
+                <div class="glass-card bg-white border border-slate-200">
+                    <button class="w-full px-6 py-4 flex justify-between items-center text-left focus:outline-none"
+                        onclick="toggleAccordion('acc2')">
+                        <span class="font-bold text-lg text-slate-800">2. 同点時および失格の判断基準</span>
+                        <svg id="icon-acc2" class="w-5 h-5 text-slate-400 transform transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div id="content-acc2" class="max-h-0 overflow-hidden px-6 transition-all duration-300">
+                        <div class="pb-4 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>総合得点が同点の場合、リレー種目の順位が高いクラスを上位とみなします。</li>
+                                <li>競技中の悪質な妨害行為・危険行為は、審判の判断により即時失格（0点）とします。</li>
+                                <li>抗議は、各クラスの体育委員を通じてのみ、競技終了後5分以内に本部に申し出ることができます。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Map & Simulation -->
+        <section>
+            <h3
+                class="text-2xl font-bold mb-6 flex items-center gap-3 border-b-2 border-sf-blue pb-2 inline-flex text-slate-800">
+                <svg class="w-6 h-6 text-sf-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7">
+                    </path>
+                </svg>
+                配置 / 動線マップ
+            </h3>
+            <div
+                class="glass-card bg-white p-6 md:p-8 flex items-center justify-center aspect-video border-[1px] border-slate-200 relative overflow-hidden group cursor-pointer shadow-sm">
+                <div class="absolute inset-0 bg-blue-50/50 flex flex-col items-center justify-center">
+                    <svg class="w-16 h-16 text-sf-blue/30 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    <span class="text-xl font-bold text-slate-500">Ground Layout Map.jpg</span>
+                    <span class="text-sm text-slate-400 mt-2">（タップして拡大）</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white/50 mt-12 py-8 text-center text-sm text-slate-500 w-full mt-auto">
+        <p>&copy; 2026 スポーツフェスティバル実行委員会. All rights reserved.</p>
+        <p class="mt-2">※本サイトは学内限定公開です。リンクの外部共有を禁じます。</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
