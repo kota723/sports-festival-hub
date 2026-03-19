@@ -281,10 +281,17 @@ window.submitUserVote = async function (pollId, optionId) {
     const pollRef = doc(db, "polls", pollId);
 
     try {
+        let pollTitle = "";
+        let optionText = "";
+
         await runTransaction(db, async (transaction) => {
             const sfDoc = await transaction.get(pollRef);
             if (!sfDoc.exists()) throw "該当の投票が見つかりません。";
             const currentData = sfDoc.data();
+
+            pollTitle = currentData.title;
+            const votedOpt = currentData.options.find(o => o.id === optionId);
+            if (votedOpt) optionText = votedOpt.text;
 
             if (currentData.voters && currentData.voters[window.currentUserEmail]) {
                 throw "既に投票済みです。";
@@ -306,6 +313,20 @@ window.submitUserVote = async function (pollId, optionId) {
                 voters: newVoters
             });
         });
+
+        // GASへデータを送信 (バックグラウンド実行のためawait不要)
+        const gasUrl = "https://script.google.com/macros/s/AKfycbwXswxvHdLCTIpZjiVjYJunWJE3X7DDgzHVNvvjU-8XSzbc9N2Bihki--rm5KxulnKTiA/exec";
+        fetch(gasUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                timestamp: new Date().toLocaleString('ja-JP'),
+                email: window.currentUserEmail,
+                pollTitle: pollTitle || "不明な投票",
+                optionText: optionText || "不明な選択肢"
+            })
+        }).catch(e => console.error("Webhook Error", e));
 
         alert("投票が完了しました！グラフで結果を確認してください。");
         await window.initVotingSystem(); // Reload all data
