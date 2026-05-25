@@ -1,17 +1,21 @@
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1PEZiEMmR2nt2ULJ8dJH-jS-icV_Y3CW1_ZChYkLTNCs/export?format=csv&gid=1031884225";
 
 async function fetchRankingData() {
+    console.log("Fetching ranking data...");
+    const container = document.getElementById('ranking-content');
+    if (!container) return;
+
     try {
         const response = await fetch(SHEET_CSV_URL);
-        const csvText = await response.text();
-        const rows = csvText.split('\n').map(row => row.split(','));
+        if (!response.ok) throw new Error("Network response was not ok");
         
-        // Parse rankings from specific columns based on screenshot
-        // Row 3-14 usually contain ranks 1-6
-        // Overall: B,C (index 1,2)
-        // High 3: G,H (index 6,7)
-        // High 2: K,L (index 10,11)
-        // High 1: O,P (index 14,15)
+        const csvText = await response.text();
+        const rows = csvText.split('\n').map(row => {
+            // Basic CSV parser that handles commas inside quotes roughly
+            return row.split(',').map(cell => cell.replace(/^"(.*)"$/, '$1').trim());
+        });
+        
+        console.log("Data fetched, rows found:", rows.length);
         
         const rankings = {
             overall: parseColumnGroup(rows, 1, 2),
@@ -20,26 +24,50 @@ async function fetchRankingData() {
             high1: parseColumnGroup(rows, 14, 15)
         };
         
+        if (rankings.overall.length === 0) {
+            container.innerHTML = `
+                <div class="text-center py-10">
+                    <p class="text-slate-400 font-bold mb-4">現在、集計データが空か公開設定待ちです。</p>
+                    <p class="text-xs text-slate-300">スプレッドシートの「ウェブに公開」設定を確認してください。</p>
+                </div>
+            `;
+            return;
+        }
+
         renderRankingUI(rankings);
     } catch (e) {
         console.error("Failed to fetch ranking data:", e);
-        const container = document.getElementById('ranking-content');
-        if (container) container.innerHTML = '<p class="text-slate-400 text-center py-8">ランキングデータの読み込みに失敗しました。</p>';
+        container.innerHTML = `
+            <div class="text-center py-10 opacity-60">
+                <p class="text-sf-red font-bold mb-2">データの読み込みに失敗しました。</p>
+                <p class="text-xs text-slate-400 mb-4">スプレッドシートの共有設定（ウェブに公開）を確認してください。</p>
+                <button onclick="window.refreshRanking()" class="text-sm bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full font-bold transition">再試行 🔄</button>
+            </div>
+        `;
     }
 }
 
 function parseColumnGroup(rows, classIdx, scoreIdx) {
     const list = [];
-    // Data usually starts from row 3 (index 2) in these sheets
-    for (let i = 2; i <= 7; i++) {
-        if (!rows[i]) continue;
-        const className = (rows[i][classIdx] || "").trim();
-        const score = (rows[i][scoreIdx] || "").trim();
-        if (className && score) {
-            list.push({ rank: i - 1, class: className, score: score });
+    // Data usually starts from some row, looking at the previous attempt
+    // Let's search for "1位" or similar in column A or the column before classIdx
+    
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row) continue;
+        
+        const rankValue = (row[classIdx-1] || "").trim();
+        const className = (row[classIdx] || "").trim();
+        const score = (row[scoreIdx] || "").trim();
+        
+        // Match things like "1位", "1", etc.
+        if ((rankValue.includes("位") || (!isNaN(rankValue) && rankValue !== "")) && className && score && score !== "回数") {
+            const numRank = parseInt(rankValue.replace("位", ""));
+            list.push({ rank: numRank, class: className, score: score });
         }
     }
-    return list;
+    // Limit to top 6
+    return list.slice(0, 6);
 }
 
 function renderRankingUI(rankings) {
@@ -47,11 +75,11 @@ function renderRankingUI(rankings) {
     if (!container) return;
 
     let html = `
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            ${renderColumn('高校総合順位', rankings.overall, 'sf-gold')}
-            ${renderColumn('高3 順位', rankings.high3, 'sf-blue')}
-            ${renderColumn('高2 順位', rankings.high2, 'sf-red')}
-            ${renderColumn('高1 順位', rankings.high1, 'slate-600')}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            ${renderColumn('総合順位', rankings.overall, 'sf-gold')}
+            ${renderColumn('高3', rankings.high3, 'sf-blue')}
+            ${renderColumn('高2', rankings.high2, 'sf-red')}
+            ${renderColumn('高1', rankings.high1, 'slate-500')}
         </div>
     `;
     
@@ -61,49 +89,38 @@ function renderRankingUI(rankings) {
 function renderColumn(title, data, colorClass) {
     const rowsHtml = data.map(item => {
         const rankClass = item.rank <= 3 ? `rank-${item.rank}` : 'rank-other';
-        const teamColor = getTeamColor(item.class);
         
         return `
-            <div class="ranking-row flex items-center justify-between p-3 mb-2 animate-fade-in">
+            <div class="ranking-row flex items-center justify-between p-3 md:p-4 mb-2 animate-fade-in group">
                 <div class="flex items-center gap-3">
-                    <span class="rank-badge ${rankClass}">${item.rank}</span>
-                    <span class="font-black text-slate-800">${item.class}</span>
+                    <span class="rank-badge ${rankClass} text-xs md:text-sm">${item.rank}</span>
+                    <span class="font-black text-slate-800 text-sm md:text-base group-hover:text-sf-blue transition">${item.class}</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl font-black text-${colorClass}">${item.score}</span>
-                    <span class="text-xs font-bold text-slate-400">回</span>
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-xl md:text-2xl font-black text-${colorClass}">${item.score}</span>
+                    <span class="text-[10px] md:text-xs font-bold text-slate-400">回</span>
                 </div>
             </div>
         `;
     }).join('');
 
     return `
-        <div class="bg-slate-50/50 p-4 rounded-2xl border-2 border-slate-100">
-            <h4 class="font-wafuu font-black text-lg mb-4 flex items-center gap-2 border-b-2 border-slate-200 pb-2">
-                <span class="w-2 h-6 bg-${colorClass} rounded-full"></span>
+        <div class="bg-slate-50/30 p-4 md:p-5 rounded-3xl border-2 border-slate-100/50 backdrop-blur-sm flex flex-col h-full">
+            <h4 class="font-wafuu font-black text-base md:text-lg lg:text-xl mb-4 md:mb-6 flex items-center gap-3 border-b-2 border-slate-200 pb-3">
+                <span class="w-1.5 h-6 bg-${colorClass} rounded-full"></span>
                 ${title}
             </h4>
-            <div class="space-y-1">
-                ${rowsHtml || '<p class="text-slate-400 text-sm text-center py-4">データがありません</p>'}
+            <div class="flex-grow space-y-1">
+                ${rowsHtml || '<p class="text-slate-400 text-xs text-center py-6">集計中...</p>'}
             </div>
         </div>
     `;
 }
 
-function getTeamColor(className) {
-    // Basic logic to determine team color from class name if possible
-    // Example: S3C might be blue, S3E might be red?
-    // Let's keep it simple for now or use the spreadsheet colors if we could parse them
-    return 'team-white'; 
-}
-
-// Initial fetch
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait for auth to be checked in main.js if needed, 
-    // but ranking can be public.
-    setTimeout(fetchRankingData, 1000); 
-    // Refresh every 5 minutes
-    setInterval(fetchRankingData, 5 * 60 * 1000);
+// Initial fetch when window loads
+window.addEventListener('load', () => {
+    // Small delay to ensure everything is ready
+    setTimeout(fetchRankingData, 500);
 });
 
 window.refreshRanking = fetchRankingData;

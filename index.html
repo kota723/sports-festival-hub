@@ -10,7 +10,7 @@
     <title>HOME - SPORTS Festival Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?v=3">
     <script>
@@ -20,10 +20,12 @@
                     colors: {
                         'sf-blue': '#0047AB',
                         'sf-red': '#DC143C',
+                        'sf-gold': '#b45309',
                         'sf-dark': '#000B18',
                     },
                     fontFamily: {
                         sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                        wafuu: ['Shippori Mincho', 'Noto Sans JP', 'serif'],
                     }
                 }
             }
@@ -33,162 +35,137 @@
 
 <body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen relative flex flex-col">
 
+    <div class="bg-lights"></div>
+
     <!-- Header -->
-    <header class="glass fixed top-0 w-full z-50 border-b border-white/50 backdrop-blur-xl bg-white/80">
-        <div
-            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 md:h-16 flex items-center justify-between gap-2 overflow-hidden">
+    <header class="glass fixed top-0 w-full z-50 border-b border-sf-gold backdrop-blur-xl bg-white/90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between gap-2 overflow-hidden">
             <div class="flex-shrink-0">
-                <h1 class="text-base md:text-2xl font-black italic tracking-wider text-sf-blue drop-shadow-sm truncate">
+                <h1 class="font-wafuu text-xl md:text-3xl font-black italic tracking-wider text-sf-blue drop-shadow-sm truncate">
                     SPORTS Festival Hub</h1>
             </div>
-            <div class="flex items-center gap-1 md:gap-4 shrink-0">
-                <!-- User Email Display -->
-                <span
-                    class="user-email-display hidden text-[10px] md:text-sm font-bold text-slate-500 bg-slate-200/50 py-1 px-1.5 md:py-1.5 md:px-3 rounded-full border border-slate-300 max-w-[90px] md:max-w-xs truncate tracking-tighter"></span>
-
-                <!-- Login Button -->
+            <div class="flex items-center gap-2 md:gap-6 shrink-0">
+                <span class="user-email-display hidden text-[10px] md:text-sm font-bold text-slate-500 bg-slate-200/50 py-1.5 px-3 rounded-full border border-slate-300 max-w-[120px] md:max-w-xs truncate"></span>
                 <button id="btn-login" onclick="showLoginPrompt()"
-                    class="bg-sf-blue hover:bg-blue-800 text-white font-black py-1.5 px-3 md:py-2 md:px-6 rounded-full shadow-[2px_2px_0_#1e293b] md:shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200 text-xs md:text-base whitespace-nowrap">
+                    class="bg-sf-blue hover:bg-blue-800 text-white font-black py-2 px-4 md:py-2.5 md:px-8 rounded-full shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200 text-xs md:text-base whitespace-nowrap">
                     ログイン🔑
                 </button>
-
-                <!-- Sign Out Button -->
                 <button id="btn-logout" onclick="globalMockLogout()"
-                    class="hidden bg-slate-800 hover:bg-slate-900 text-white font-black py-1.5 px-3 md:py-2 md:px-6 rounded-full shadow-[2px_2px_0_#1e293b] md:shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200 text-xs md:text-base whitespace-nowrap">
-                    <span class="hidden md:inline">サインアウト </span>👋
+                    class="hidden bg-slate-800 hover:bg-slate-900 text-white font-black py-2 px-4 md:py-2.5 md:px-8 rounded-full shadow-[4px_4px_0_#1e293b] hover:-translate-y-1 transition-all duration-200 text-xs md:text-base whitespace-nowrap">
+                    サインアウト 👋
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Login View (Visible when NOT logged in) -->
-    <main id="login-view" class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 z-40 relative">
-        <div
-            class="glass-card bg-white p-8 md:p-10 max-w-md w-full text-center rounded-[2rem] shadow-[8px_8px_0_#1e293b] border-4 border-slate-800 relative overflow-hidden">
-            <div
-                class="absolute -top-10 -right-10 w-40 h-40 bg-sf-blue/20 rounded-full mix-blend-multiply filter blur-3xl">
-            </div>
-            <div
-                class="absolute -bottom-10 -left-10 w-40 h-40 bg-sf-red/10 rounded-full mix-blend-multiply filter blur-3xl">
-            </div>
-            <h3 class="text-2xl md:text-3xl font-black mb-4 relative z-10 text-slate-800">Googleでログイン</h3>
-            <p class="text-slate-600 font-bold mb-8 text-xs md:text-sm relative z-10 leading-relaxed">
-                学校のアカウント(@mita-is.ed.jp)<br>でログインしてね！<br>
-                <span class="text-sf-red mt-2 inline-block">※ログインしないとサイトは見られません🙅‍♂️</span>
+    <!-- Login View -->
+    <main id="login-view" class="flex-grow flex items-center justify-center pt-32 pb-12 px-4 z-40 relative">
+        <div class="glass-card bg-white p-10 md:p-14 max-w-lg w-full text-center rounded-[2.5rem] shadow-[12px_12px_0_#1e293b] border-4 border-slate-800 relative overflow-hidden">
+            <h3 class="font-wafuu text-3xl md:text-4xl font-black mb-6 text-slate-800">Googleでログイン</h3>
+            <p class="text-slate-600 font-bold mb-10 text-sm md:text-lg leading-relaxed">
+                学校のアカウント(@mita-is.ed.jp)を使用して<br>認証を行ってください。<br>
+                <span class="text-sf-red mt-4 inline-block px-4 py-2 bg-red-50 rounded-lg border border-red-100">※学内限定コンテンツです🙅‍♂️</span>
             </p>
             <button onclick="globalMockLogin()"
-                class="bg-slate-800 hover:bg-slate-700 text-white font-black py-3 md:py-4 px-6 md:px-8 rounded-full shadow-[4px_4px_0_#sf-blue] transform transition active:translate-y-1 active:shadow-none mx-auto w    <!-- App View (Hidden when NOT logged in) -->
-    <main id="app-view" class="hidden flex-grow pt-24 md:pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+                class="bg-slate-800 hover:bg-slate-700 text-white font-black py-4 md:py-5 px-10 md:px-12 rounded-full shadow-[6px_6px_0_#sf-gold] transform transition active:translate-y-1 active:shadow-none mx-auto w-full text-lg md:text-xl border-2 border-slate-900">
+                ログイン画面へ進む
+            </button>
+        </div>
+    </main>
+
+    <!-- App View -->
+    <main id="app-view" class="hidden flex-grow pt-32 md:pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         
-        <!-- Main Visual / Wafuu Hero -->
-        <section class="text-center mb-12 md:mb-20 relative animate-fade-in">
+        <!-- Hero Section -->
+        <section class="text-center mb-20 md:mb-32 relative animate-fade-in px-4">
             <div class="inline-block relative">
-                <div class="absolute -top-6 -left-6 w-12 h-12 border-t-4 border-l-4 border-sf-gold"></div>
-                <div class="absolute -bottom-6 -right-6 w-12 h-12 border-b-4 border-r-4 border-sf-gold"></div>
+                <div class="absolute -top-12 -left-12 w-24 h-24 border-t-4 border-l-4 border-sf-gold opacity-40"></div>
+                <div class="absolute -bottom-12 -right-12 w-24 h-24 border-b-4 border-r-4 border-sf-gold opacity-40"></div>
                 
-                <h2 class="font-wafuu text-3xl md:text-6xl font-black tracking-[0.2em] text-slate-800 mb-2 drop-shadow-sm">
+                <h2 class="font-wafuu text-4xl sm:text-6xl md:text-8xl font-black tracking-[0.2em] text-slate-800 mb-6 drop-shadow-xl scale-y-110">
                     SPORTS <span class="text-sf-red">Festival</span> Hub
                 </h2>
-                <div class="h-1 w-full bg-slate-800 my-4 transform scale-x-75"></div>
-                <p class="font-wafuu text-sm md:text-xl font-bold tracking-widest text-slate-500 uppercase">
+                <div class="h-2 w-full bg-slate-800 my-8 transform scale-x-90 rounded-full"></div>
+                <p class="font-wafuu text-sm sm:text-xl md:text-2xl font-bold tracking-[0.5em] text-slate-500 uppercase">
                     Mita International School of Science
                 </p>
             </div>
 
-            <!-- Countdown with Wafuu Style -->
-            <div class="mt-10 md:mt-12 backdrop-blur-md bg-white/40 inline-block px-6 py-6 md:px-12 md:py-10 border-4 border-slate-800 rounded-2xl shadow-[8px_8px_0_#b45309] transform hover:-translate-y-1 transition-all duration-300">
-                <div class="text-xs md:text-base font-black text-sf-gold mb-4 tracking-[0.3em] uppercase">開催まであと</div>
+            <div class="mt-16 md:mt-24 backdrop-blur-md bg-white/70 inline-block px-10 py-10 md:px-20 md:py-16 border-4 border-slate-800 rounded-3xl shadow-[15px_15px_0_#b45309] transform hover:-translate-y-2 transition-all duration-500">
+                <div class="text-sm md:text-2xl font-black text-sf-gold mb-8 tracking-[0.6em] uppercase border-b-4 border-sf-gold/20 inline-block pb-2">開催まで</div>
                 <div id="countdown"
-                    class="text-4xl sm:text-5xl md:text-7xl font-black tracking-widest tabular-nums text-slate-900 border-b-4 border-slate-800 pb-2 flex justify-center gap-2 items-end">
-                    00<span class="text-xs md:text-xl align-middle pb-2 md:pb-4 ml-1 text-slate-400">日</span>
-                    00<span class="text-xs md:text-xl align-middle pb-2 md:pb-4 ml-1 text-slate-400">時</span>
-                    00<span class="text-xs md:text-xl align-middle pb-2 md:pb-4 ml-1 text-slate-400">分</span>
-                    00<span class="text-xs md:text-xl align-middle pb-2 md:pb-4 ml-1 text-slate-400">秒</span>
+                    class="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter tabular-nums text-slate-900 flex justify-center gap-4 md:gap-8 items-center">
+                    00:00:00:00
                 </div>
             </div>
         </section>
 
-        <!-- Ranking Section: Great Jumper -->
-        <section class="mb-12 md:mb-16">
-            <div class="bg-white p-6 md:p-10 border-4 border-slate-800 rounded-[2rem] shadow-[8px_8px_0_#1e293b] relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4">
-                    <button onclick="window.refreshRanking()" class="text-slate-400 hover:text-sf-blue hover:rotate-180 transition-all duration-500">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+        <!-- Ranking Section -->
+        <section class="mb-20 md:mb-24 px-2">
+            <div class="bg-white/90 p-8 md:p-14 border-4 border-slate-800 rounded-[3rem] shadow-[12px_12px_0_#1e293b] relative overflow-hidden backdrop-blur-md">
+                <div class="absolute top-0 right-0 p-6">
+                    <button onclick="window.refreshRanking()" class="text-slate-400 hover:text-sf-blue hover:rotate-180 transition-all duration-700">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                     </button>
                 </div>
                 
-                <h3 class="font-wafuu text-2xl md:text-4xl font-black text-slate-800 mb-2 flex items-center justify-center gap-3">
+                <h3 class="font-wafuu text-3xl md:text-5xl font-black text-slate-800 mb-4 text-center">
                     <span class="text-sf-red">縄</span> 大縄回数ランキング <span class="text-sf-red">縄</span>
                 </h3>
-                <p class="text-center text-slate-500 font-bold mb-8 text-xs md:text-base">
-                    練習の成果をリアルタイム更新！(スプレッドシート連動)
+                <p class="text-center text-slate-500 font-bold mb-12 text-sm md:text-xl">
+                    練習の成果をリアルタイム更新中！
                 </p>
 
                 <div id="ranking-content">
                     <!-- Loading State -->
-                    <div class="flex flex-col items-center justify-center py-12">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-sf-blue mb-4"></div>
-                        <p class="text-slate-500 font-bold">ランキングデータを取得中...</p>
+                    <div class="flex flex-col items-center justify-center py-16">
+                        <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-sf-blue mb-6"></div>
+                        <p class="text-slate-500 font-bold text-lg md:text-xl">スプレッドシートから読み込み中...</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Navigation Cards Area (Rules & Others) -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-12">
-            <!-- Card 1: Rules -->
-            <a href="rules.html"
-                class="bg-white p-6 md:p-8 flex flex-col group block border-4 border-slate-800 rounded-[1.5rem] md:rounded-3xl shadow-[6px_6px_0_#1e293b] hover:-translate-y-2 transition-all duration-300">
-                <div
-                    class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-slate-100 flex items-center justify-center mb-4 text-3xl md:text-4xl group-hover:scale-110 transition">
-                    📖</div>
-                <h4 class="font-wafuu text-xl md:text-2xl font-black mb-3 text-slate-800 group-hover:text-sf-blue transition">ルール＆ペナルティ</h4>
-                <p class="text-sm md:text-base text-slate-600 flex-grow font-semibold leading-relaxed">
-                    減点やペナルティの条件。もったいないから、さらっとでも読んでおこう⚠️
-                </p>
-                <div
-                    class="mt-6 text-slate-800 font-black text-sm md:text-base flex items-center bg-slate-100 py-2 px-4 rounded-full w-max">
-                    詳細を確認 <svg
-                        class="w-4 h-4 ml-2 transform group-hover:translate-x-1.5 transition"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </div>
-            </a>
-
-            <!-- Feedback Card -->
-            <div class="bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-3xl border-4 border-slate-800 shadow-[6px_6px_0_#1e293b] flex flex-col group relative overflow-hidden">
-                <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-sf-blue/10 rounded-full blur-2xl"></div>
-                <div class="relative z-10 flex-grow">
-                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 text-3xl md:text-4xl group-hover:scale-110 transition">📮</div>
-                    <h3 class="font-wafuu text-xl md:text-2xl font-black text-slate-800 mb-3 group-hover:text-sf-blue transition">みんなの意見箱</h3>
-                    <p class="text-sm md:text-base text-slate-600 font-semibold leading-relaxed">
-                        スポフェスをより良くするための意見や質問を募集中！<br>
-                        <span class="text-sf-blue mt-2 inline-block">「ここを変えてほしい！」なんでもOK🙌</span>
+        <!-- Navigation Area -->
+        <section class="max-w-6xl mx-auto mb-20 px-2 lg:px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+                <!-- Card 1: Rules -->
+                <a href="rules.html"
+                    class="bg-white/90 p-10 md:p-14 flex flex-col group block border-4 border-slate-800 rounded-[2.5rem] shadow-[12px_12px_0_#1e293b] hover:-translate-y-3 hover:shadow-[18px_18px_0_#1e293b] transition-all duration-500 relative overflow-hidden backdrop-blur-md">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-sf-gold opacity-40"></div>
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-slate-50 flex items-center justify-center mb-8 text-5xl md:text-6xl group-hover:rotate-6 transition-transform shadow-inner">📖</div>
+                    <h4 class="font-wafuu text-3xl md:text-4xl font-black mb-6 text-slate-800 group-hover:text-sf-blue">ルール＆ペナルティ</h4>
+                    <p class="text-lg md:text-xl text-slate-600 font-semibold leading-relaxed mb-10">
+                        競技ルールや減点事項の最終確認はこちら。正々堂々と勝利を掴み取ろう。
                     </p>
-                </div>
-                <div class="relative z-10 mt-6">
-                    <a href="https://forms.gle/EXEFdTJopA3GLsCZ8" target="_blank" rel="noopener noreferrer"
-                        class="bg-slate-800 hover:bg-slate-900 text-white font-black py-4 px-8 rounded-full shadow-[4px_4px_0_#0047AB] transform transition active:translate-y-1 active:shadow-none flex items-center justify-center gap-2 text-center text-lg">
-                        意見を送る 🚀
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>-slate-800 hover:bg-slate-900 border-2 border-slate-800 text-white font-black py-3 px-6 md:py-4 md:px-8 rounded-full shadow-[2px_2px_0_#sf-blue] md:shadow-[4px_4px_0_#sf-blue] transform transition active:translate-y-1 active:shadow-none flex items-center justify-center gap-2 text-center text-sm md:text-lg">
-                    意見箱に投稿 🚀
+                    <div class="mt-auto text-slate-900 font-black text-lg md:text-xl flex items-center bg-slate-50 py-4 px-8 rounded-full w-max border-4 border-slate-800 shadow-[6px_6px_0_#1e293b] group-hover:bg-sf-gold group-hover:text-white transition-all">
+                        詳細を表示 <svg class="w-6 h-6 ml-4 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                    </div>
                 </a>
+
+                <!-- Feedback Card -->
+                <div class="bg-white/90 p-10 md:p-14 rounded-[2.5rem] border-4 border-slate-800 shadow-[12px_12px_0_#1e293b] flex flex-col group relative overflow-hidden backdrop-blur-md">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-sf-blue opacity-40"></div>
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-blue-50 flex items-center justify-center mb-8 text-5xl md:text-6xl group-hover:scale-110 transition-transform shadow-inner">📮</div>
+                    <h3 class="font-wafuu text-3xl md:text-4xl font-black text-slate-800 mb-6 group-hover:text-sf-blue">みんなの意見箱</h3>
+                    <p class="text-lg md:text-xl text-slate-600 font-semibold leading-relaxed mb-10">
+                        より良いスポーツフェスティバルのために。皆さんの建設的な意見をお待ちしています。
+                    </p>
+                    <div class="mt-auto">
+                        <a href="https://forms.gle/EXEFdTJopA3GLsCZ8" target="_blank" rel="noopener noreferrer"
+                            class="bg-slate-800 hover:bg-slate-900 text-white font-black py-5 px-12 rounded-full shadow-[8px_8px_0_#0047AB] transform transition active:translate-y-1 active:shadow-none flex items-center justify-center gap-4 text-center text-xl md:text-2xl border-2 border-slate-900">
+                            意見箱へ投稿 🚀
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
-    <footer
-        class="border-t border-slate-300 bg-slate-50 py-6 md:py-8 text-center text-xs md:text-sm text-slate-500 w-full mt-auto">
-        <p>&copy; 2026 スポーツフェスティバル実行委員会</p>
-        <p class="mt-1 md:mt-2 scale-90 md:scale-100">※学内限定公開です。外部共有を禁じます。</p>
+    <footer class="border-t-2 border-slate-200 bg-white/50 py-10 text-center text-sm md:text-base text-slate-500 w-full mt-auto backdrop-blur-sm">
+        <p class="font-bold">&copy; 2026 スポーツフェスティバル実行委員会</p>
+        <p class="mt-2 opacity-70">※学内限定公開。外部共有禁止。</p>
     </footer>
 
     <script type="module" src="js/main.js?v=firebase"></script>

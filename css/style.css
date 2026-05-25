@@ -22,7 +22,35 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    opacity: 0.15; /* Subtle background */
+    opacity: 0.25; /* Increased for iPad/Mac */
+}
+
+/* Decorative Accents for Widescreen */
+@media (min-width: 1280px) {
+    body::before {
+        content: '';
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 100px;
+        height: 100px;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUwIDBMNjAgNDBMMTAwIDUwTDYwIDYwTDUwIDEwMEw0MCA2MEwwIDUwTDQwIDQwTDUwIDBaIiBmaWxsPSIjYjQ1MzA5IiBmaWxsLW9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==');
+        background-repeat: no-repeat;
+        z-index: -1;
+        opacity: 0.5;
+    }
+    body::after {
+        content: '';
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 150px;
+        height: 150px;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUwIDBMNjAgNDBMMTAwIDUwTDYwIDYwTDUwIDEwMEw0MCA2MEwwIDUwTDQwIDQwTDUwIDBaIiBmaWxsPSIjOTkxYjFiIiBmaWxsLW9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==');
+        background-repeat: no-repeat;
+        z-index: -1;
+        opacity: 0.5;
+    }
 }
 
 /* Glassmorphism with Wafuu twist */
