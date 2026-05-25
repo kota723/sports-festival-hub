@@ -1,11 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@400;700&display=swap');
 
 body {
     font-family: 'Inter', 'Noto Sans JP', sans-serif;
     overflow-x: hidden;
+    background-color: #fdfcf0; /* Washi paper tint */
 }
 
-/* Background dynamic lights */
+.font-wafuu {
+    font-family: 'Shippori Mincho', 'Noto Sans JP', serif;
+}
+
+/* Wafuu Background Overlay */
 .bg-lights {
     position: fixed;
     top: 0;
@@ -13,52 +18,95 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: -1;
-    background:
-        radial-gradient(circle at 10% 20%, rgba(0, 71, 171, 0.15) 0%, transparent 60%),
-        radial-gradient(circle at 90% 80%, rgba(220, 20, 60, 0.1) 0%, transparent 60%),
-        linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-    animation: pulse 12s infinite alternate;
+    background-image: url('wafuu_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.15; /* Subtle background */
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-}
-
-/* Glassmorphism */
+/* Glassmorphism with Wafuu twist */
 .glass {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 2px solid #b45309; /* Gold accent line */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 1rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #e2e8f0;
+    border-radius: 1.5rem;
+    box-shadow: 6px 6px 0 rgba(0, 71, 171, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 71, 171, 0.15);
-    border: 1px solid rgba(255, 255, 255, 1);
+    transform: translateY(-4px);
+    box-shadow: 10px 10px 0 rgba(0, 71, 171, 0.15);
+    border-color: #0047AB;
 }
 
-.text-gradient {
-    background: linear-gradient(90deg, #0047AB, #DC143C);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* Traditional Colors */
+.text-sf-blue { color: #0047AB; }
+.bg-sf-blue { background-color: #0047AB; }
+.text-sf-red { color: #991b1b; } /* Deep Crimson */
+.bg-sf-red { background-color: #991b1b; }
+.text-sf-gold { color: #b45309; }
+.bg-sf-gold { background-color: #b45309; }
+
+/* Ranking Table Styles */
+.ranking-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.ranking-row {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.ranking-row:hover {
+    transform: scale(1.01);
+}
+
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-weight: 900;
+    color: white;
+}
+
+.rank-1 { background-color: #fbbf24; border: 2px solid #f59e0b; } /* Gold */
+.rank-2 { background-color: #94a3b8; border: 2px solid #64748b; } /* Silver */
+.rank-3 { background-color: #b45309; border: 2px solid #854d0e; } /* Bronze */
+.rank-other { background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+
+.team-badge {
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: white;
+}
+
+.team-blue { background-color: #0047AB; }
+.team-red { background-color: #991b1b; }
+.team-white { background-color: #f1f5f9; color: #1e293b; border: 1px solid #e2e8f0; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
 }
